@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Venta Flask App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fef6f7;
+      margin: 0;
+      padding: 20px;
+      color: #5a4a4a;
+    }
+    h1 {
+      text-align: center;
+      color: #b77a85; 
+    }
+    .form-container {
+    max-width: 400px; 
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fcebed;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+    input[type="text"], button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #f3d3d6;
+      font-size: 16px;
+      background-color: #fff9f9;
+      color: #4b3b3b;
+    }
+    button {
+      background-color: #d9a0aa;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #c68993;
+    }
+    table {
+      width: 90%;
+      max-width: 900px;
+      margin: 30px auto;
+      border-collapse: collapse;
+      background-color: #fffafa;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+    th, td {
+      padding: 14px;
+      text-align: left;
+      border-bottom: 1px solid #f3d3d6;
+    }
+    thead {
+      background-color: #f4cdd3;
+      color: #5b4a4a;
+    }
+    a {
+      color: #a76a75;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .flash-message {
+      background-color: #fcebed;
+      color: #a84e5c;
+      padding: 10px;
+      border-left: 4px solid #d9a0aa;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      max-width: 450px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="message">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+<h2 style="text-align:center; color:#b77a85;">Agregar datos de Venta</h2>
+<form action="/add_venta" method="POST" class="form-container">
+
+    <input type="text" name="num_factura" placeholder="Numero de Factura" required>
+    <input type="text" name="comprador" placeholder="Comprador (ID)" required>
+    <input type="text" name="vendedor" placeholder="Vendedor (ID)" required>
+    <input type="text" name="precio_total" placeholder="Precio Total" required>
+    <input type="text" name="iva_total" placeholder="Iva Total" required>
+    <button type="submit">
+        Save
+    </button>
+    </form>
+
+<table> 
+    <thead>
+        <td>Numero de Factura</td>
+        <td>Comprador (ID)</td>
+        <td>Vendedor(ID)</td>
+        <td>Precio Total</td>
+        <td>Iva Total</td>
+        <td>Operaciones</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for venta in venta %}
+        <tr>
+            <td>{{venta.1}}</td>
+            <td>{{venta.2}}</td>
+            <td>{{venta.3}}</td>
+            <td>{{venta.4}}</td>
+            <td>{{venta.5}}</td>
+            <td>
+                <a href="/edit/{{venta[0]}}">Editar</a>
+                <a href="/delete/{{venta.0}}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+

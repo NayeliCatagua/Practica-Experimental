@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Venta</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff6f9;
+      color: #333;
+      padding: 20px;
+    }
+    h2 {
+      color: #c06c84;
+    }
+    form {
+      background-color: #ffeef3;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #a85d6a;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #f5c6cb;
+      border-radius: 6px;
+      background-color: #fff9fa;
+    }
+    button {
+      background-color: #e295a6;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #d1798c;
+    }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align: center;">Editar Venta</h2>
+<form action="/update/{{ venta[0] }}" method="POST">    
+    <label for="num_factura">Número de Factura</label>
+    <input type="text" name="num_factura" id="num_factura" value="{{ venta[1] }}" required>
+
+    <label for="comprador">Comprador (ID)</label>
+    <input type="text" name="comprador" id="comprador" value="{{ venta[2] }}" required>
+
+    <label for="vendedor">Vendedor (ID)</label>
+    <input type="text" name="vendedor" id="vendedor" value="{{ venta[3] }}" required>
+
+    <label for="precio_total">Precio Total</label>
+    <input type="text" name="precio_total" id="precio_total" value="{{ venta[4] }}" required>
+
+    <label for="iva_total">IVA Total</label>
+    <input type="text" name="iva_total" id="iva_total" value="{{ venta[5] }}" required>
+
+    <button type="submit">
+        Save
+    </button>
+    </form>
